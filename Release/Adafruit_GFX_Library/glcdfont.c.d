@@ -1,0 +1,26 @@
+C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release\Adafruit_GFX_Library\glcdfont.c.o: \
+ C:\Users\lars-\Documents\Arduino\libraries\Adafruit_GFX_Library\glcdfont.c \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/pgmspace.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/pgmspace.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/stdint.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/machine/_default_types.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/features.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/_intsup.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/include/ets_sys.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/include/c_types.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/cdefs.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/include/eagle_soc.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/include/osapi.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/string.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/newlib.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/config.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/machine/ieeefp.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/xtensa/config/core-isa.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/reent.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/_ansi.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/_types.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/machine/_types.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/lock.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/sys/string.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/user_config.h
