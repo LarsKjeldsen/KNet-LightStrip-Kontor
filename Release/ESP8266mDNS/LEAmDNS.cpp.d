@@ -68,6 +68,7 @@ C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Print.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/WString.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Printable.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/stdlib_noniso.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\libraries\ESP8266WiFi\src/include/slist.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/lwip2/include/lwip/udp.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/lwip2/include/lwip/ip.h \
@@ -82,7 +83,6 @@ C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/PolledTimeout.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Arduino.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/math.h \
- C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/stdlib_noniso.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/binary.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/esp8266_peri.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/include/c_types.h \
@@ -94,7 +94,8 @@ C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release
  C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release/core/core_version.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/WCharacter.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/HardwareSerial.h \
- C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/time.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/../include/time.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/../include/_ansi.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/machine/time.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Stream.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/uart.h \

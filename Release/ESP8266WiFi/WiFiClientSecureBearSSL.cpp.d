@@ -79,7 +79,8 @@ C:\Users\lars-\AppData\Local\Temp\VMBuilds\LightStrip\esp8266com_generic\Release
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/WCharacter.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/WString.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/HardwareSerial.h \
- C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/time.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/../include/time.h \
+ C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/../include/_ansi.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266/tools/sdk/libc/xtensa-lx106-elf/include/machine/time.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Stream.h \
  C:\Users\lars-\Documents\Arduino\hardware\esp8266com\esp8266\cores\esp8266/Print.h \
