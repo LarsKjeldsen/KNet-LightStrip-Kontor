@@ -1,3 +1,24 @@
+#include <LEAmDNS_Priv.h>
+#include <LEAmDNS_lwIPdefs.h>
+#include <LEAmDNS.h>
+#include <ESP8266mDNS.h>
+#include <WiFiUdp.h>
+#include <WiFiServerSecureBearSSL.h>
+#include <WiFiServerSecure.h>
+#include <WiFiServer.h>
+#include <WiFiClientSecureBearSSL.h>
+#include <WiFiClientSecure.h>
+#include <WiFiClient.h>
+#include <ESP8266WiFiType.h>
+#include <ESP8266WiFiSTA.h>
+#include <ESP8266WiFiScan.h>
+#include <ESP8266WiFiMulti.h>
+#include <ESP8266WiFiGratuitous.h>
+#include <ESP8266WiFiGeneric.h>
+#include <ESP8266WiFiAP.h>
+#include <ESP8266WiFi.h>
+#include <CertStoreBearSSL.h>
+#include <BearSSLHelpers.h>
 #define FASTLED_INTERNAL
 #include <ArduinoOTA.h>
 #include <platforms.h>
@@ -27,12 +48,11 @@
 #include <chipsets.h>
 #include <bitswap.h>
 #include <PubSubClient.h>
-#include <ESP8266mDNS.h>
 #include "Light.h"
 #include "WIFI-Secret.h"
 
-#define TOPIC "Light/Kontor/Strib/"
-#define TOPIC_DEBUG "Light/Kontor/Strib/Debug"
+#define TOPIC "Light/Kontor/Strip/"
+#define TOPIC_DEBUG "Light/Kontor/Strip/Debug"
 
 
 int Brightness_Top = 0;
@@ -48,7 +68,7 @@ IPAddress gw(192, 168, 1, 1);
 IPAddress mask(255, 255, 255, 0);
 WiFiClient ethClient;
 
-IPAddress MQTTServer(192, 168, 1, 4);
+IPAddress MQTTServer(192, 168, 1, 21);
 PubSubClient MQTTclient(ethClient);
 
 
@@ -88,7 +108,7 @@ void setup() {
 		Serial.println("\nEnd");
 	});
 	ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-		//Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+		Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
 	});
 	ArduinoOTA.onError([](ota_error_t error) {
 		Serial.printf("Error[%u]: ", error);
@@ -208,12 +228,13 @@ void reconnect() {
 void loop() 
 {
 	if (!MQTTclient.connected()) {
+		Serial.println("MQTT reconnecting");
 		reconnect();
 	}
 	MQTTclient.loop();
 
 	ArduinoOTA.handle();
 
-	delay(20);
+//	delay(20);
 //	SetLight(Mode_Top, Brightness_Top, Mode_But, Brightness_But);
 }

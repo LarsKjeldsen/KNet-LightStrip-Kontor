@@ -1,0 +1,4 @@
+# KNet-LightStrip-kontor build property overrides
+#
+network.port=8266
+
