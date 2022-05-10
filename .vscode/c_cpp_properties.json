@@ -113,7 +113,7 @@
                 "__ets__",
                 "ICACHE_FLASH",
                 "ARDUINO=10805",
-                "ARDUINO_BOARD=\"PLATFORMIO_ESP01\"",
+                "ARDUINO_BOARD=\"PLATFORMIO_ESP01_1M\"",
                 "FLASHMODE_QIO",
                 "LWIP_OPEN_SRC",
                 "NONOSDK22x_190703=1",
