@@ -9,10 +9,11 @@
 #include <PubSubClient.h>
 #include "Light.h"
 #include "WIFI-Secret.h"
+#include <string.h>
 
-#define TOPIC "Light/Kontor/Strip/"
-#define TOPIC_Status "Light/Kontor/strip/status"
-#define TOPIC_DEBUG "Light/Kontor/Strip/Debug"
+#define TOPIC        "Light/Kontor/Strip/Set/#"
+#define TOPIC_Status "Light/Kontor/Strip/Status"
+#define TOPIC_DEBUG  "Light/Kontor/Strip/Debug"
 #define INTERVAL 10000  // 10 SEC
 bool LightsOn = false;
 unsigned long MillisPrev;
@@ -34,54 +35,47 @@ WiFiClient ethClient;
 IPAddress MQTTServer(192, 168, 1, 21);
 PubSubClient MQTTclient(ethClient);
 
-void callback(char* topic, byte* payload, unsigned int length) {
-	char *Command;
-	char value[20];
+void callback(char* topic, byte* payload, unsigned int length) 
+{
+	String Value;
+	String Command;
 	unsigned int i;
 
 	Serial.print("Message arrived - ");
-	for (i = 0; (i < length) && (i < 20); i++) {
-		value[i] = payload[i];
-	}
-	value[i] = '\0';
-
-	if (strlen(topic) > sizeof(TOPIC)) {
-		Command = &topic[sizeof(TOPIC) - 1];
-
-		Serial.print("Command = ");
-		Serial.print(Command);
-		Serial.print(" , Value = ");
-		Serial.println(value);
-
-		if (!strcasecmp(Command, "brightnesstop")) {
-			int b = atoi(value);
-			Brightness_Top = b;
-			LightsOn = SetBrightness(TOP, b);
-			SendStatus();
-
-		} else
-		if (!strcasecmp(Command, "brightnessbut")) {
-			int b = atoi(value);
-			Brightness_But = b;
-			LightsOn = SetBrightness(BUT, b);
-			SendStatus();
-		} else
-
-		if (!strcasecmp(Command, "poweron")) {
-			int b = atoi(value);
-			Brightness_But = b;
-			Brightness_Top = b;
-			LightsOn = PowerON(BUT, b);
-			LightsOn = PowerON(TOP, b);
-			SendStatus();
-		} else
-		if (!strcasecmp(Command, "poweroff")) {
-			Brightness_But = 0;
-			Brightness_Top = 0;
-			LightsOn = PowerOFF(BUT, 0);
-			LightsOn = PowerOFF(TOP, 0);
-			SendStatus();
+	bool v_split = false;
+	
+	for (i = 0; i < length; i++) {
+		if (payload[i] == ',') {
+			v_split = true;
+			continue;
 		}
+		if (v_split)
+			Value += (char)(payload[i]);
+		else 
+			Command += (char)(payload[i]);
+	}
+// MQTTclient.publish(TOPIC_DEBUG, Command.c_str());
+// MQTTclient.publish(TOPIC_DEBUG, Value.c_str());
+
+	if (Command == "brightnesstop") {
+		LightsOn = SetBrightness(TOP, Value.toInt());
+		SendStatus();
+	} 
+	else
+	if (Command == "brightnessbut") {
+		LightsOn = SetBrightness(BUT, Value.toInt());
+		SendStatus();
+	} 
+	else
+	if (Command == "on") {
+		LightsOn = PowerON(BUT, 255);
+		LightsOn = PowerON(TOP, 255);
+		SendStatus();
+	} else
+	if (Command == "off") {
+		LightsOn = PowerON(BUT, 0);
+		LightsOn = PowerON(TOP, 0);
+		SendStatus();
 	}
 }
 
@@ -170,12 +164,8 @@ void reconnect() {
 		// Attempt to connect
 		if (MQTTclient.connect("KontorLightStrib-1")) {
 			Serial.println("connected");
-			char s[sizeof(TOPIC) + 3];
-			strcpy(s, TOPIC);
-			Serial.println(s);
-			strcat(s, "#");
-			Serial.println(s);
-			MQTTclient.subscribe(s);
+			Serial.println(TOPIC);
+			MQTTclient.subscribe(TOPIC);
 		}
 		else {
 			Serial.print("failed, rc=");
@@ -214,7 +204,7 @@ void loop()
 void SendStatus()
 {
 		if (LightsOn)
-			MQTTclient.publish(TOPIC_Status, "on");
+			MQTTclient.publish(TOPIC_Status, "on", true);
 		else
-			MQTTclient.publish(TOPIC_Status, "off");
+			MQTTclient.publish(TOPIC_Status, "off", true);
 }
