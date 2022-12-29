@@ -260,6 +260,8 @@ paket-files/
 __pycache__/
 *.pyc
 
+.pio
 .pio/
+.vscode
 .vscode/
 WIFI-Secret.h

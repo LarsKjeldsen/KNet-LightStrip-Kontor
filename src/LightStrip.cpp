@@ -1,4 +1,9 @@
+#if __cplusplus >= 201703L
+#define register // keyword 'register' is banned with c++17
+#endif
+
 #define FASTLED_INTERNAL
+#include <Arduino.h>
 #include <ArduinoOTA.h>
 #include <FastLED.h>
 #include <PubSubClient.h>
@@ -6,18 +11,22 @@
 #include "WIFI-Secret.h"
 
 #define TOPIC "Light/Kontor/Strip/"
+#define TOPIC_Status "Light/Kontor/strip/status"
 #define TOPIC_DEBUG "Light/Kontor/Strip/Debug"
-
+#define INTERVAL 10000  // 10 SEC
+bool LightsOn = false;
+unsigned long MillisPrev;
 
 int Brightness_Top = 0;
-int Mode_Top = 10;
+int Mode_Top = 0;
 int Brightness_But = 0;
-int Mode_But = 10;
+int Mode_But = 0;
 
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASSWORD;
 
 IPAddress ip(192, 168, 1, 213);
+// IPAddress ip(192, 168, 1, 202); // Debug
 IPAddress gw(192, 168, 1, 1);
 IPAddress mask(255, 255, 255, 0);
 WiFiClient ethClient;
@@ -47,26 +56,31 @@ void callback(char* topic, byte* payload, unsigned int length) {
 		if (!strcasecmp(Command, "brightnesstop")) {
 			int b = atoi(value);
 			Brightness_Top = b;
-			SetBrightness(TOP, b);
+			LightsOn = SetBrightness(TOP, b);
+			SendStatus();
+
 		} else
 		if (!strcasecmp(Command, "brightnessbut")) {
 			int b = atoi(value);
 			Brightness_But = b;
-			SetBrightness(BUT, b);
+			LightsOn = SetBrightness(BUT, b);
+			SendStatus();
 		} else
 
 		if (!strcasecmp(Command, "poweron")) {
 			int b = atoi(value);
 			Brightness_But = b;
 			Brightness_Top = b;
-			PowerON(BUT, b);
-			PowerON(TOP, b);
+			LightsOn = PowerON(BUT, b);
+			LightsOn = PowerON(TOP, b);
+			SendStatus();
 		} else
 		if (!strcasecmp(Command, "poweroff")) {
 			Brightness_But = 0;
 			Brightness_Top = 0;
-			PowerOFF(BUT, 0);
-			PowerOFF(TOP, 0);
+			LightsOn = PowerOFF(BUT, 0);
+			LightsOn = PowerOFF(TOP, 0);
+			SendStatus();
 		}
 	}
 }
@@ -91,7 +105,7 @@ void setup() {
 	}
 
 	Serial.print(F("Starting OTA - "));
-	ArduinoOTA.setHostname("LightStrib");
+	ArduinoOTA.setHostname("LightStribKontor");
 	ArduinoOTA.onStart([]() {
 		String type;
 		if (ArduinoOTA.getCommand() == U_FLASH) {
@@ -140,8 +154,9 @@ void setup() {
 	Serial.println(F("All initialised, starting loop"));
 
 	// Start light at 10%
-	PowerON(TOP, 10);
-	PowerON(BUT, 10);
+	LightsOn = PowerON(TOP, 10);
+	LightsOn = PowerON(BUT, 10);
+	SendStatus();
 }
 
 
@@ -153,11 +168,8 @@ void reconnect() {
 	while (!MQTTclient.connected()) {
 		Serial.print("Attempting MQTT connection...");
 		// Attempt to connect
-		if (MQTTclient.connect("KontorLightStrib")) {
+		if (MQTTclient.connect("KontorLightStrib-1")) {
 			Serial.println("connected");
-			// Once connected, publish an announcement...
-			MQTTclient.publish(TOPIC_DEBUG, "hello world");
-			// ... and resubscribe
 			char s[sizeof(TOPIC) + 3];
 			strcpy(s, TOPIC);
 			Serial.println(s);
@@ -190,6 +202,19 @@ void loop()
 
 	ArduinoOTA.handle();
 
-//	delay(20);
+	if (millis() - MillisPrev > INTERVAL)
+	{
+		MillisPrev = millis();
+		SendStatus();
+	}
+	delay(20);
 //	SetLight(Mode_Top, Brightness_Top, Mode_But, Brightness_But);
+}
+
+void SendStatus()
+{
+		if (LightsOn)
+			MQTTclient.publish(TOPIC_Status, "on");
+		else
+			MQTTclient.publish(TOPIC_Status, "off");
 }

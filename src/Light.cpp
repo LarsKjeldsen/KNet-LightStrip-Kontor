@@ -1,3 +1,8 @@
+#if __cplusplus >= 201703L
+#define register // keyword 'register' is banned with c++17
+#endif
+
+#include <Arduino.h>
 #include <Light.h>
 #include "FastLED.h"
 
@@ -9,7 +14,7 @@
 #define TOP_S 45
 #define TOP_E 89
 
-#define DATA_PIN 2 //D5
+#define DATA_PIN D2 //D5
 
 CRGBArray<NUM_LEDS> leds;
 
@@ -44,50 +49,55 @@ void SetLight(int Mode_top, int Brightness_top, int Mode_But, int Brightness_But
 	*/
 }
 
-void SetBrightness(int TopBut, int b)
+bool SetBrightness(int TopBut, int b)
 {
-	PowerON(TopBut, b);
+	return PowerON(TopBut, b);
 }
 
 
-void PowerOFF(int TopBut, int b)
+bool PowerOFF(int TopBut, int b)
 {
 	if (TopBut)
 		for (int i = 0; i <= (TOP_E - TOP_S) / 2; i++) {
 			leds[TOP_S + i] = CHSV(255, 0, 0);
 			leds[TOP_E - i] = CHSV(255, 0, 0);
 			LEDS.show();
-			LEDS.delay(20);
+			LEDS.delay(30);
 		}
 	else
 		for (int i = 0; i <= (BUT_E - BUT_S) / 2; i++) {
 			leds[BUT_S + i] = CHSV(128, 0, 0);
 			leds[BUT_E - i] = CHSV(128, 0, 0);
 			LEDS.show();
-			LEDS.delay(20);
+			LEDS.delay(30);
 		}
+	return false;
 }
 
 
-void PowerON(int TopBut, int b)
+bool PowerON(int TopBut, int b)
 {
 	if (TopBut)
 		for (int i = 0; i <= (TOP_E - TOP_S) / 2; i++) {
 			leds[TOP_S + i] = CHSV(20, 60 + (i * 4), b);
 			leds[TOP_E - i] = CHSV(20, 60 + (i * 4), b);
 			LEDS.show();
-			LEDS.delay(20);
+			LEDS.delay(40);
 		}
 	else
 		for (int i = 0; i <= (BUT_E - BUT_S) / 2; i++) {
-			leds[BUT_S + i] = CHSV(0, 60 + (i * (b / 50)), b);
-			leds[BUT_E - i] = CHSV(0, 60 + (i * (b / 50)), b);
+			leds[BUT_S + i] = CHSV(0, 60 + (i * (b / 60)), b);
+			leds[BUT_E - i] = CHSV(0, 60 + (i * (b / 60)), b);
 			LEDS.show();
-			LEDS.delay(20);
+			LEDS.delay(40);
 		}
 
 //	LEDS.setBrightness(b);
 //	LEDS.setTemperature(Tungsten40W);
 	LEDS.show();
+	if (b == 0)  // If we turn on with zero in brughtness
+		return false;
+	else
+		return true;
 }
 

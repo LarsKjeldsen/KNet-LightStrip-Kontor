@@ -14,11 +14,12 @@
 	#include "WProgram.h"
 #endif
 
-void SetBrightness(int, int);
-void PowerON(int, int);
-void PowerOFF(int, int);
+bool SetBrightness(int, int);
+bool PowerON(int, int);
+bool PowerOFF(int, int);
 void SetupLeds();
 void SetLight(int Mode_top, int Brightness_top, int Mode_But, int Brightness_But);
+void SendStatus();
 
 #endif
 
