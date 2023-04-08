@@ -32,7 +32,7 @@ IPAddress gw(192, 168, 1, 1);
 IPAddress mask(255, 255, 255, 0);
 WiFiClient ethClient;
 
-IPAddress MQTTServer(192, 168, 1, 21);
+IPAddress MQTTServer(192, 168, 1, 22);
 PubSubClient MQTTclient(ethClient);
 
 void callback(char* topic, byte* payload, unsigned int length) 
