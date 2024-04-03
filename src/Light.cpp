@@ -84,14 +84,20 @@ bool PowerON(int TopBut, int b)
 			LEDS.show();
 			LEDS.delay(40);
 		}
-	else
+	else {
 		for (int i = 0; i <= (BUT_E - BUT_S) / 2; i++) {
-			leds[BUT_S + i] = CHSV(0, 60 + (i * (b / 60)), b);
-			leds[BUT_E - i] = CHSV(0, 60 + (i * (b / 60)), b);
-			LEDS.show();
-			LEDS.delay(40);
+			{
+				leds[BUT_S + i] = CHSV(0, 60 + (i * (b / 60)), b);
+				leds[BUT_E - i] = CHSV(0, 60 + (i * (b / 60)), b);
+				LEDS.show();
+				LEDS.delay(40);
+			}
 		}
-
+		for (int i = 0; i < 20; i++) {
+			leds[i] = CHSV(100+i, 0, b);
+			LEDS.show();
+		}
+	}
 //	LEDS.setBrightness(b);
 //	LEDS.setTemperature(Tungsten40W);
 	LEDS.show();
